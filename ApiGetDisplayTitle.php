@@ -48,10 +48,17 @@ class ApiGetDisplayTitle extends ApiBase {
 		);
 
 		$api->execute();
-		$data = $api->getResultData();
+		if ( defined( 'ApiResult::META_CONTENT' ) ) {
+			$data = array_values( ApiResult::removeMetadataNonRecursive(
+				$api->getResult()->getResultData( array( 'query', 'pages' ) )
+			) );
+			$namespace = $data[0]["ns"];
+		} else {
+			$data = $api->getResultData();
+			$key = array_shift( array_keys( $data["query"]["pages"] ) );
+			$namespace = $data["query"]["pages"][$key]["ns"];
+		}
 
-		$key = array_shift( array_keys( $data["query"]["pages"] ) );
-		$namespace = $data["query"]["pages"][$key]["ns"];
 
 		// If the namespace is in $wgSemanticTitleProperties, extract the title property.
 
@@ -72,7 +79,11 @@ class ApiGetDisplayTitle extends ApiBase {
 			);
 
 			$api->execute();
-			$data = $api->getResultData();
+			if ( defined( 'ApiResult::META_CONTENT' ) ) {
+				$data = $api->getResult()->getResultData();
+			} else {
+				$data = $api->getResultData();
+			}
 
 			$displayName = $data["query"]["results"][$pageTitle]["printouts"][$displayNameProperty][0];
 			if ( $displayName == null )
