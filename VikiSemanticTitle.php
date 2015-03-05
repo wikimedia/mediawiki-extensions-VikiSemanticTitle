@@ -54,7 +54,7 @@ if ( version_compare( SMW_VERSION, '1.9', '<' ) ) {
 
 $wgExtensionCredits['parserhook'][] = array (
 	'name' => 'VikiSemanticTitle',
-	'version' => '1.0.1',
+	'version' => '1.1',
 	'author' => '[http://www.mediawiki.org/wiki/User:Jji Jason Ji]',
 	'descriptionmsg' => 'vikisemantictitle-desc',
 	'path' => __FILE__,
@@ -77,8 +77,6 @@ $wgResourceModules['ext.VikiSemanticTitle'] = array(
 	)
 );
 
-$wgAutoloadClasses['ApiGetDisplayTitle'] = __DIR__ . '/ApiGetDisplayTitle.php';
-
 global $wgVIKI_Function_Hooks;
 
 if ( !isset( $wgVIKI_Function_Hooks ) )
@@ -91,7 +89,6 @@ else
 		array( 'VIKI.VikiSemanticTitle.checkForSemanticTitle' );
 
 $wgHooks['ParserFirstCallInit'][] = 'efVikiSemanticTitle_AddResource';
-$wgAPIModules['getDisplayTitle'] = 'ApiGetDisplayTitle';
 
 function efVikiSemanticTitle_AddResource ( & $parser ) {
 	VikiJS::addResourceModule( "ext.VikiSemanticTitle" );

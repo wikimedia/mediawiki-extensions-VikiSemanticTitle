@@ -65,9 +65,9 @@ window.VIKI = ( function( mw, my ) {
 				url: node.apiURL,
 				dataType: node.sameServer ? 'json' : 'jsonp',
 				data: {
-					action: 'getDisplayTitle',
+					action: 'getSemanticTitle',
 					format: 'json',
-					pageTitle: node.semanticTitle
+					titles: node.semanticTitle
 				},
 				success: function( data ) {
 					self.processDisplayTitle( vikiObject, data, node );
@@ -92,7 +92,7 @@ window.VIKI = ( function( mw, my ) {
 		 * @param {Object} node node to check for display name
 		 */
 		processDisplayTitle: function( vikiObject, data, node ) {
-			var semanticTitle = data.getDisplayTitle.result;
+			var semanticTitle = data.getSemanticTitle[0].result;
 			if ( node.semanticTitle !== semanticTitle ) {
 
 				node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.substring( 0, 20 ) + "...";
