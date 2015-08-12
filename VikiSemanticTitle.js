@@ -92,18 +92,28 @@ window.VIKI = ( function( mw, my ) {
 		 * @param {Object} node node to check for display name
 		 */
 		processDisplayTitle: function( vikiObject, data, node ) {
-			var semanticTitle = data.getSemanticTitle[0].result;
-			if ( node.semanticTitle !== semanticTitle ) {
+			if(data.getSemanticTitle.length > 0 && data.getSemanticTitle[0].result) {
+				var semanticTitle = data.getSemanticTitle[0].result;
+				semanticTitle = semanticTitle.replace(/&amp;/g, '&')
+											 .replace(/&lt;/g, '<')
+											 .replace(/&gt;/g, '>')
+											 .replace(/&quot;/g, '"')
+											 .replace(/&#039;/g, '\'');
+				if ( node.semanticTitle !== semanticTitle ) {
 
-				node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.substring( 0, 20 ) + "...";
-				node.fullDisplayName = semanticTitle + " (" + node.pageTitle + ")";
+					node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.substring( 0, 20 ) + "...";
+					node.fullDisplayName = semanticTitle + " (" + node.pageTitle + ")";
+				}
+				node.semanticQueried = true;
+
+				vikiObject.hookCompletion( my.hookName, {
+					"redrawNode": true,
+					"node": node
+				} );
 			}
-			node.semanticQueried = true;
-
-			vikiObject.hookCompletion( my.hookName, {
-				"redrawNode": true,
-				"node": node
-			} );
+			else {
+				vikiObject.hookCompletion( my.hookName );
+			}
 		}
 	};
 
