@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wladek92"
+		]
+	},
+	"vikisemantictitle-error-displaytitle-fetch": "Erreur d'accès aux données concernant le titre à afficher pour le nœud: $1."
+}
