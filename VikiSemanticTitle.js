@@ -97,26 +97,37 @@ window.VIKI = ( function( mw, my ) {
 			data = data.query.pages[ Object.keys( data.query.pages )[ 0 ] ];
 			if(data.pageprops && data.pageprops.displaytitle) {
 				var semanticTitle = data.pageprops.displaytitle;
-				semanticTitle = semanticTitle.replace(/&amp;/g, '&')
-											 .replace(/&lt;/g, '<')
-											 .replace(/&gt;/g, '>')
-											 .replace(/&quot;/g, '"')
-											 .replace(/&#039;/g, '\'');
-				if ( node.semanticTitle !== semanticTitle ) {
-
-					node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.substring( 0, 20 ) + "...";
-					node.fullDisplayName = semanticTitle + " (" + node.pageTitle + ")";
+				semanticTitleStripped = this.stripTags(semanticTitle).trim();
+				if(semanticTitleStripped.length == 0) {
+					vikiObject.hookCompletion( my.hookName );
 				}
-				node.semanticQueried = true;
+				else {
+					semanticTitle = semanticTitle.replace(/&amp;/g, '&')
+												 .replace(/&lt;/g, '<')
+												 .replace(/&gt;/g, '>')
+												 .replace(/&quot;/g, '"')
+												 .replace(/&#039;/g, '\'');
+					if ( node.semanticTitle !== semanticTitle ) {
 
-				vikiObject.hookCompletion( my.hookName, {
-					"redrawNode": true,
-					"node": node
-				} );
+						node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.substring( 0, 20 ) + "...";
+						node.fullDisplayName = semanticTitle + " (" + node.pageTitle + ")";
+					}
+					node.semanticQueried = true;
+
+					vikiObject.hookCompletion( my.hookName, {
+						"redrawNode": true,
+						"node": node
+					} );
+				}
 			}
 			else {
 				vikiObject.hookCompletion( my.hookName );
 			}
+		},
+		stripTags: function(html) {
+		   var tmp = document.createElement("DIV");
+		   tmp.innerHTML = html;
+		   return tmp.textContent || tmp.innerText || "";
 		}
 	};
 
