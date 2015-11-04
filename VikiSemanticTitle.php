@@ -27,6 +27,18 @@
 * include_once("$IP/extensions/VikiSemanticTitle/VikiSemanticTitle.php");
 */
 
+if ( function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'VikiSemanticTitle' );
+	// Keep i18n globals so mergeMessageFileList.php doesn't break
+	$wgMessagesDirs['VikiSemanticTitle'] = __DIR__ . "/i18n";
+	$wgExtensionMessagesFiles['VikiSemanticTitle'] = __DIR__ . '/VikiSemanticTitle.i18n.php';
+	wfWarn(
+		'Deprecated PHP entry point used for VikiSemanticTitle extension. Please use wfLoadExtension instead, ' .
+		'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
+	);
+	return;
+}
+
 if ( !defined( 'MEDIAWIKI' ) ) {
 	die( '<b>Error:</b> This file is part of a MediaWiki extension and cannot be run standalone.' );
 }
@@ -54,7 +66,7 @@ if ( version_compare( SMW_VERSION, '1.9', '<' ) ) {
 
 $wgExtensionCredits['parserhook'][] = array (
 	'name' => 'VikiSemanticTitle',
-	'version' => '1.2.1',
+	'version' => '1.3',
 	'author' => '[http://www.mediawiki.org/wiki/User:Jji Jason Ji]',
 	'descriptionmsg' => 'vikisemantictitle-desc',
 	'path' => __FILE__,
@@ -88,9 +100,5 @@ else
 	$wgVIKI_Function_Hooks['AfterVisitNodeHook'] =
 		array( 'VIKI.VikiSemanticTitle.checkForSemanticTitle' );
 
-$wgHooks['ParserFirstCallInit'][] = 'efVikiSemanticTitle_AddResource';
-
-function efVikiSemanticTitle_AddResource ( & $parser ) {
-	VikiJS::addResourceModule( "ext.VikiSemanticTitle" );
-	return true;
-}
+$wgHooks['ParserFirstCallInit'][] = 'VikiSemanticTitle::efVikiSemanticTitle_AddResource';
+$wgAutoloadClasses['VikiSemanticTitle'] = __DIR__ . '/VikiSemanticTitle_body.php';
