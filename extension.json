@@ -11,7 +11,7 @@
 		]
 	},
 	"AutoloadClasses": {
-		"VikiSemanticTitle" : "VikiSemanticTitle_body.php"
+		"VikiSemanticTitle": "VikiSemanticTitle_body.php"
 	},
 	"ResourceModules": {
 		"ext.VikiSemanticTitle": {
@@ -35,5 +35,6 @@
 			"VikiSemanticTitle::efVikiSemanticTitle_AddResource"
 		]
 	},
-	"callback": "VikiSemanticTitle::onRegistration"
+	"callback": "VikiSemanticTitle::onRegistration",
+	"manifest_version": 1
 }
