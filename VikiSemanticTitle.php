@@ -31,7 +31,6 @@ if ( function_exists( 'wfLoadExtension' ) ) {
 	wfLoadExtension( 'VikiSemanticTitle' );
 	// Keep i18n globals so mergeMessageFileList.php doesn't break
 	$wgMessagesDirs['VikiSemanticTitle'] = __DIR__ . "/i18n";
-	$wgExtensionMessagesFiles['VikiSemanticTitle'] = __DIR__ . '/VikiSemanticTitle.i18n.php';
 	wfWarn(
 		'Deprecated PHP entry point used for VikiSemanticTitle extension. Please use wfLoadExtension instead, ' .
 		'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
