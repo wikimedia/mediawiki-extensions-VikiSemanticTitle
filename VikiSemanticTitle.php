@@ -22,10 +22,13 @@
  */
 
 /**
-* To activate the functionality of this extension include the following
-* in your LocalSettings.php file:
-* include_once("$IP/extensions/VikiSemanticTitle/VikiSemanticTitle.php");
-*/
+ * To activate the functionality of this extension include the following
+ * in your LocalSettings.php file:
+ * MW 1.25+
+ * wfLoadExtension( "VikiSemanticTitle" );
+ * MW 1.23 and 1.24
+ * include_once "$IP/extensions/VikiSemanticTitle/VikiSemanticTitle.php";
+ */
 
 if ( function_exists( 'wfLoadExtension' ) ) {
 	wfLoadExtension( 'VikiSemanticTitle' );
@@ -48,9 +51,9 @@ if ( !defined( 'VIKIJS_VERSION' ) ) {
 		. 'on a line ABOVE the line where you\'ve included VikiSemanticTitle.' );
 }
 
-if ( version_compare( $wgVersion, '1.22', 'lt' ) ) {
+if ( version_compare( $wgVersion, '1.23', 'lt' ) ) {
 	die( '<b>Error:</b> This version of VikiSemanticTitle '
-		. 'is only compatible with MediaWiki 1.22 or above.' );
+		. 'is only compatible with MediaWiki 1.23 or above.' );
 }
 
 if ( !defined( 'SMW_VERSION' ) ) {
@@ -65,17 +68,18 @@ if ( version_compare( SMW_VERSION, '1.9', '<' ) ) {
 
 $wgExtensionCredits['parserhook'][] = array (
 	'name' => 'VikiSemanticTitle',
-	'version' => '1.3',
-	'author' => '[http://www.mediawiki.org/wiki/User:Jji Jason Ji]',
+	'version' => '1.4.0',
+	'author' => '[https://www.mediawiki.org/wiki/User:Jji Jason Ji]',
 	'descriptionmsg' => 'vikisemantictitle-desc',
 	'path' => __FILE__,
-	'url' => 'http://www.mediawiki.org/wiki/Extension:VikiSemanticTitle'
+	'url' => 'https://www.mediawiki.org/wiki/Extension:VikiSemanticTitle',
+	'license-name' => 'MIT'
 );
 
 $wgMessagesDirs['VikiSemanticTitle'] = __DIR__ . '/i18n';
 
 $wgResourceModules['ext.VikiSemanticTitle'] = array(
-	'localBasePath' => dirname( __FILE__ ),
+	'localBasePath' => __DIR__,
 	'remoteExtPath' => 'VikiSemanticTitle',
 	'scripts' => array(
 		'VikiSemanticTitle.js'
