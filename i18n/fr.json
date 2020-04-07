@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Wladek92",
-			"Gomoko"
+			"Gomoko",
+			"Wladek92"
 		]
 	},
 	"vikisemantictitle-desc": "Module VIKI pour gérer les pages du wiki en utilisant l’extension Titre Sémantique.",
