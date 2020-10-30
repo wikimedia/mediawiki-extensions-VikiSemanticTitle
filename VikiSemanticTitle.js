@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-window.VIKI = ( function( mw, my ) {
+window.VIKI = ( function ( mw, my ) {
 	/**
 	 * @class VikiSemanticTitle
 	 *
@@ -29,7 +29,7 @@ window.VIKI = ( function( mw, my ) {
 	 */
 	my.VikiSemanticTitle = {
 		displayNames: {},
-		hookName: "",
+		hookName: '',
 
 		/**
 		 * Hook function to check this page for the usage of a semantic title.
@@ -41,12 +41,13 @@ window.VIKI = ( function( mw, my ) {
 		 * @param {Array} parameters all VIKI hook calls come with parameters
 		 * @param {string} hookName name of the hook this function was registered with
 		 */
-		checkForSemanticTitle: function( vikiObject, parameters, hookName ) {
+		checkForSemanticTitle: function ( vikiObject, parameters, hookName ) {
 			this.hookName = hookName;
 			var node = parameters[ 0 ];
 			node.semanticTitle = node.pageTitle;
-			if ( !node.semanticQueried && !node.dynamicPage )
+			if ( !node.semanticQueried && !node.dynamicPage ) {
 				this.queryForSemanticTitle( vikiObject, node );
+			}
 
 		},
 
@@ -59,7 +60,7 @@ window.VIKI = ( function( mw, my ) {
 		 * @param {Object} vikiObject reference to the VIKI object that this is a plugin to
 		 * @param {Object} node node to check for display name
 		 */
-		queryForSemanticTitle: function( vikiObject, node ) {
+		queryForSemanticTitle: function ( vikiObject, node ) {
 			var self = this;
 			jQuery.ajax( {
 				url: node.apiURL,
@@ -71,11 +72,11 @@ window.VIKI = ( function( mw, my ) {
 					ppprop: 'displaytitle',
 					format: 'json'
 				},
-				success: function( data ) {
+				success: function ( data ) {
 					self.processDisplayTitle( vikiObject, data, node );
 
 				},
-				error: function() {
+				error: function () {
 					vikiObject.showError( mw.message( 'vikisemantictitle-error-displaytitle-fetch', node.pageTitle )
 						.text() );
 					vikiObject.hookCompletion( self.hookName );
@@ -93,43 +94,41 @@ window.VIKI = ( function( mw, my ) {
 		 * @param {Object} data data returned from the query
 		 * @param {Object} node node to check for display name
 		 */
-		processDisplayTitle: function( vikiObject, data, node ) {
+		processDisplayTitle: function ( vikiObject, data, node ) {
 			data = data.query.pages[ Object.keys( data.query.pages )[ 0 ] ];
-			if(data.pageprops && data.pageprops.displaytitle) {
+			if ( data.pageprops && data.pageprops.displaytitle ) {
 				var semanticTitle = data.pageprops.displaytitle;
-				semanticTitleStripped = this.stripTags(semanticTitle).trim();
-				if(semanticTitleStripped.length == 0) {
+				semanticTitleStripped = this.stripTags( semanticTitle ).trim();
+				if ( semanticTitleStripped.length === 0 ) {
 					vikiObject.hookCompletion( my.hookName );
-				}
-				else {
-					semanticTitle = semanticTitle.replace(/&amp;/g, '&')
-												 .replace(/&lt;/g, '<')
-												 .replace(/&gt;/g, '>')
-												 .replace(/&quot;/g, '"')
-												 .replace(/&#039;/g, '\'');
+				} else {
+					semanticTitle = semanticTitle.replace( /&amp;/g, '&' )
+						.replace( /&lt;/g, '<' )
+						.replace( /&gt;/g, '>' )
+						.replace( /&quot;/g, '"' )
+						.replace( /&#039;/g, '\'' );
 					if ( node.semanticTitle !== semanticTitle ) {
 
-						node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.substring( 0, 20 ) + "...";
-						node.fullDisplayName = semanticTitle + " (" + node.pageTitle + ")";
+						node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.substring( 0, 20 ) + '...';
+						node.fullDisplayName = semanticTitle + ' (' + node.pageTitle + ')';
 					}
 					node.semanticQueried = true;
 
 					vikiObject.hookCompletion( my.hookName, {
-						"redrawNode": true,
-						"node": node
+						redrawNode: true,
+						node: node
 					} );
 				}
-			}
-			else {
+			} else {
 				vikiObject.hookCompletion( my.hookName );
 			}
 		},
-		stripTags: function(html) {
-		   var tmp = document.createElement("DIV");
-		   tmp.innerHTML = html;
-		   return tmp.textContent || tmp.innerText || "";
+		stripTags: function ( html ) {
+			var tmp = document.createElement( 'DIV' );
+			tmp.innerHTML = html;
+			return tmp.textContent || tmp.innerText || '';
 		}
 	};
 
 	return my;
-}( mediaWiki, window.VIKI || {} ) );
+}( window.VIKI || {} ) );
