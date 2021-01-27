@@ -6,5 +6,5 @@
 		]
 	},
 	"vikisemantictitle-desc": "VIKI plugin to handle wiki pages using Semantic Title extension",
-	"vikisemantictitle-error-displaytitle-fetch" : "Error fetching display title data for node: $1."
+	"vikisemantictitle-error-displaytitle-fetch": "Error fetching display title data for node: $1."
 }
