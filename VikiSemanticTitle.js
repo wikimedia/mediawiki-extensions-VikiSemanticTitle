@@ -109,7 +109,7 @@ window.VIKI = ( function ( mw, my ) {
 						.replace( /&#039;/g, '\'' );
 					if ( node.semanticTitle !== semanticTitle ) {
 
-						node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.substring( 0, 20 ) + '...';
+						node.displayName = semanticTitle.length < 20 ? semanticTitle : semanticTitle.slice( 0, 20 ) + '...';
 						node.fullDisplayName = semanticTitle + ' (' + node.pageTitle + ')';
 					}
 					node.semanticQueried = true;
