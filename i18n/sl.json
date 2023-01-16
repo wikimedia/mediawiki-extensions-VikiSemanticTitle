@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"vikisemantictitle-desc": "VIKI vtičnik za upravljanje viki strani z razširitvijo Semantic Title",
+	"vikisemantictitle-error-displaytitle-fetch": "Napaka pri pridobivanju podatkov prikaznega naslova za vozlišče: $1"
+}
