@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"vikisemantictitle-desc": "VIKI-plug-in voor het afhandelen van wikipagina’s met behulp van de uitbreiding Semantic Title",
+	"vikisemantictitle-error-displaytitle-fetch": "Fout bij het opvragen van weergavetitelgegevens voor het knooppunt: $1."
+}
