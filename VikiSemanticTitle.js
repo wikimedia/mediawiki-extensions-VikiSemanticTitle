@@ -25,7 +25,6 @@ window.VIKI = ( function ( mw, my ) {
 	 * @class VikiSemanticTitle
 	 *
 	 * Create VikiSemanticTitle, a plugin to VIKI to handle pages using the Semantic Title extension.
-	 *
 	 */
 	my.VikiSemanticTitle = {
 		displayNames: {},
