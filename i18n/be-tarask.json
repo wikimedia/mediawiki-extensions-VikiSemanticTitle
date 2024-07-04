@@ -2,9 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Kapatych",
-			"Red Winged Duck"
+			"Red Winged Duck",
+			"Renessaince"
 		]
 	},
-	"vikisemantictitle-desc": "Убудова VIKI для апрацоўкі вікі-старонак з выкарыстаннем пашырэння Semantic Title",
+	"vikisemantictitle-desc": "VIKI-дадатак для апрацоўкі вікістаронак з дапамогай пашырэньня Semantic Title",
 	"vikisemantictitle-error-displaytitle-fetch": "Памылка пры атрыманьні зьвестак загалоўку для адлюстраваньня старонкі: $1."
 }
