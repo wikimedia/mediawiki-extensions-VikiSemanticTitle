@@ -42,7 +42,7 @@ window.VIKI = ( function ( mw, my ) {
 		 */
 		checkForSemanticTitle: function ( vikiObject, parameters, hookName ) {
 			this.hookName = hookName;
-			var node = parameters[ 0 ];
+			const node = parameters[ 0 ];
 			node.semanticTitle = node.pageTitle;
 			if ( !node.semanticQueried && !node.dynamicPage ) {
 				this.queryForSemanticTitle( vikiObject, node );
@@ -60,7 +60,7 @@ window.VIKI = ( function ( mw, my ) {
 		 * @param {Object} node node to check for display name
 		 */
 		queryForSemanticTitle: function ( vikiObject, node ) {
-			var self = this;
+			const self = this;
 			jQuery.ajax( {
 				url: node.apiURL,
 				dataType: node.sameServer ? 'json' : 'jsonp',
@@ -96,7 +96,7 @@ window.VIKI = ( function ( mw, my ) {
 		processDisplayTitle: function ( vikiObject, data, node ) {
 			data = data.query.pages[ Object.keys( data.query.pages )[ 0 ] ];
 			if ( data.pageprops && data.pageprops.displaytitle ) {
-				var semanticTitle = data.pageprops.displaytitle;
+				let semanticTitle = data.pageprops.displaytitle;
 				semanticTitleStripped = this.stripTags( semanticTitle ).trim();
 				if ( semanticTitleStripped.length === 0 ) {
 					vikiObject.hookCompletion( my.hookName );
@@ -123,7 +123,7 @@ window.VIKI = ( function ( mw, my ) {
 			}
 		},
 		stripTags: function ( html ) {
-			var tmp = document.createElement( 'DIV' );
+			const tmp = document.createElement( 'DIV' );
 			tmp.innerHTML = html;
 			return tmp.textContent || tmp.innerText || '';
 		}
