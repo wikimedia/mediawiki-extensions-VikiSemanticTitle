@@ -5,5 +5,5 @@
 		]
 	},
 	"vikisemantictitle-desc": "Semantic Title 확장 기능을 사용하여 위키 문서를 처리하기 위한 VIKI 플러그인",
-	"vikisemantictitle-error-displaytitle-fetch": "노드의 제목 데이터를 불러오는 중에 오류가 발생했습니다: $1."
+	"vikisemantictitle-error-displaytitle-fetch": "노드의 제목 데이터를 불러오던 중에 오류가 발생했습니다: $1."
 }
