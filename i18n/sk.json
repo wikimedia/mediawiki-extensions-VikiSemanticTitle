@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"vikisemantictitle-desc": "Zásuvný modul VIKI na prácu s wiki stránkami používajúcimi rozšírenie Semantic Title",
+	"vikisemantictitle-error-displaytitle-fetch": "Chyba pri získavaní údajov o zobrazenom názve pre uzol: $1."
+}
